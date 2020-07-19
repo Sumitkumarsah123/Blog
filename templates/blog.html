@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+
+
+
+  <!-- Page Content -->
+
+  {% block content %}
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-4">Welcome To Awesome Blog Page
+          
+        </h1>
+
+        <!-- Blog Post -->
+        {% for datas in data %}
+        <div class="card mb-4">
+          <img class="card-img-top" src="{{datas.img.url}}" alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{datas.title}}</h2>
+            <p class="card-text">{{datas.content|linebreaks|truncatewords:3}}</p>
+            <a href="/blog_details/{{datas.id}}" class="btn btn-primary">Read More &rarr;</a>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{datas.date_posted}} by
+            <a href="#">{{datas.writer}}</a>
+          </div>
+        </div>
+        
+        
+        {% endfor %}
+
+        <!-- Blog Post -->
+        
+        <!-- Pagination -->
+
+        {% if is_paginated %}
+        <ul class="pagination justify-content-center mb-4">
+           {% if page_obj.has_previous %}
+           <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.previous_page_number}}">&larr; Previous Page</a>
+          </li>
+      
+           {% endif %}
+
+           {% if page_obj.has_next %}
+           <li class="page-item">
+            <a class="page-link" href="?page={{page_obj.next_page_number}}">&rarr; Next Page</a>
+          </li>
+      
+           {% endif %}
+        </ul>
+              
+
+
+
+        {% endif %}
+
+        <!-- <ul class="pagination justify-content-center mb-4">
+          <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+          </li>
+        </ul> -->
+
+      </div>
+
+
+
+{% endblock %}

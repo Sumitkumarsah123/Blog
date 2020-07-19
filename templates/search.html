@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if messages %}
+ {% for k in messages %}
+ {{k}}
+ {% endfor %}
+{% endif %}
+
+{% if sr %}
+        {% for item in sr %}
+
+        <div class="container">
+
+            <div class="row">
+        
+              <!-- Blog Entries Column -->
+              <div class="col-md-8">
+        
+                <h1 class="my-4">Welcome To Awesome Blog Page
+                  
+                </h1>
+        
+                <!-- Blog Post -->
+                
+                <div class="card mb-4">
+                  <img class="card-img-top" src="{{item.img.url}}" alt="Card image cap">
+                  <div class="card-body">
+                    <h2 class="card-title">{{item.title}}</h2>
+                    <p class="card-text">{{item.content|linebreaks|truncatewords:3}}</p>
+                    <a href="/blog_details/{{item.id}}" class="btn btn-primary">Read More &rarr;</a>
+                  </div>
+                  <div class="card-footer text-muted">
+                    Posted on {{item.date_posted}} by
+                    <a href="#">{{item.writer}}</a>
+                  </div>
+                </div>
+                
+                
+                
+        
+                <!-- Blog Post -->
+                
+                <!-- Pagination -->
+                <ul class="pagination justify-content-center mb-4">
+                  <li class="page-item">
+                    <a class="page-link" href="#">&larr; Older</a>
+                  </li>
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#">Newer &rarr;</a>
+                  </li>
+                </ul>
+        
+              </div>
+        
+      {% endfor %}
+      {% endif %}
+
+
+{% endblock %}
